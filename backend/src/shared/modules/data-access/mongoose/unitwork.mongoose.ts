@@ -23,19 +23,19 @@ export class MongooseUnitOfWork implements IUnitOfWork {
       case !this.session:
         throw new Error('Transaction must be started');
       case this.session.inTransaction():
-        throw new Error('QueryRunner has been released');
+        throw new Error('session has been released');
       default:
-        return Fact.build();
+        return Fact.build(this.asyncDatabaseConnection);
     }
   }
 
   async start(): Promise<void> {
     this.session = await this.asyncDatabaseConnection.startSession();
-    this.session.startTransaction();
   }
 
   async commit<T>(work: () => Promise<T> | T): Promise<T> {
     try {
+      this.session.startTransaction();
       const result = await work();
       await this.session.commitTransaction();
       return result;

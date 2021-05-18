@@ -5,6 +5,7 @@ import {OrderByType} from "../types/base-orderBy.type";
 import {PageParams} from "../PaginatorParams";
 import {PaginatedFindResult} from "../PaginatedFindResult";
 import {Result} from "../Result";
+import {Connection} from "mongoose";
 
 export interface IRepository<
     E,
@@ -71,5 +72,5 @@ export interface IRepositoryFactory<
     FilterableFields,
     IncludesType extends string,
     R extends IRepository<E, FilterableFields, IncludesType>> {
-  build(): R;
+  build(connection: Connection): R;
 }

@@ -11,8 +11,7 @@ import {OrderByType} from "../../../core/types/base-orderBy.type";
 import {buildWhereFromWhereType} from "./where.builder";
 import {Result} from "../../../core/Result";
 import {AppError} from "../../../core/errors/AppError";
-import {FilterQuery, Model, UpdateQuery} from 'mongoose';
-
+import {FilterQuery, Model} from 'mongoose';
 
 export type FilterableFieldsType<T> = {
   [K in keyof T]?: unknown;
@@ -44,13 +43,19 @@ export class BaseRepository<
     Object.keys(x)
       .filter(key => key !== '_id')
       .forEach(key => (entity[key] = x[key]));
-    entity.id = x._id;
+    entity.id = x._id.toString();
     return entity;
   }
 
   async save(entity: E): Promise<void> {
     this._logger.debug(`Save entity with id: {${entity._id}}`);
-    await new this._model(this._domainToPersistentFunc(entity)).save();
+    const persistentEntity = this._domainToPersistentFunc(entity);
+    await this._model.findByIdAndUpdate(
+      persistentEntity.id,
+      {...(persistentEntity as any)},
+      {upsert: true}
+      );
+    // await new this._model(persistentEntity).save();
   }
 
   async saveMany(entities: E[]): Promise<void> {

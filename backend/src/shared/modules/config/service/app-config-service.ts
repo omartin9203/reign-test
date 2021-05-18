@@ -23,17 +23,8 @@ export class AppConfigService {
   };
 
   database: IDataBaseConfig = {
-    type: this._configService.get<string>('database.type'),
-    username: this._configService.get<string>('database.username'),
-    password: this._configService.get<string>('database.password'),
     connectString:
-      this._configService.get<string>('database.connectString') ?? undefined,
-    host: this._configService.get<string>('database.host') ?? undefined,
-    database: this._configService.get<string>('database.database') ?? undefined,
-    synchronize: this._configService.get<boolean>(
-      'database.synchronize',
-      false,
-    ),
+      this._configService.get<string>('database.connectString'),
   };
 
   graphql: IGraphqlConfig = {

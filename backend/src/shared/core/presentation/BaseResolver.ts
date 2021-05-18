@@ -4,8 +4,8 @@ import { ApolloError } from 'apollo-server-express';
 
 export abstract class BaseResolver {
   protected _logger: Logger;
-  constructor(context: string) {
-    this._logger = new Logger(context);
+  constructor() {
+    this._logger = new Logger(this.constructor.name);
   }
 
   protected handleErrors(resultError: IResultError): void {

@@ -1,0 +1,44 @@
+import {PaginatedFindNewsUseCaseDto} from "../../dto/paginated-find-news-use-case.dto";
+import {Inject, Injectable} from "@nestjs/common";
+import {BaseUseCase} from "../../../../shared/core/BaseUseCase";
+import {INewsRepository, OrderByNews, WhereNews} from "../../../domain/interfeces/INewsRepository";
+import {Result} from "../../../../shared/core/Result";
+import {PaginatedFindResult} from "../../../../shared/core/PaginatedFindResult";
+import {News} from "../../../domain/entities/news.entity";
+import {PageParams} from "../../../../shared/core/PaginatorParams";
+import {AppError} from "../../../../shared/core/errors/AppError";
+
+export type PaginatedFindNewsUseCaseResp = Result<PaginatedFindResult<News>>;
+
+@Injectable()
+export class PaginatedFindNewsUseCase
+  extends BaseUseCase<PaginatedFindNewsUseCaseDto, PaginatedFindNewsUseCaseResp> {
+  constructor(
+    @Inject('INewsRepository')
+    private readonly _repository: INewsRepository,
+  ) {
+    super()
+  }
+  async execute(
+    request: PaginatedFindNewsUseCaseDto,
+  ): Promise<PaginatedFindNewsUseCaseResp> {
+    this._logger.log('Executing...');
+    const pageParamsOrErr = PageParams.create(request.pageParams);
+    if (pageParamsOrErr.isFailure) {
+      return Result.Fail(pageParamsOrErr.unwrapError());
+    }
+    const pageParams = pageParamsOrErr.unwrap();
+    const where = Object.assign(request.where ?? {}, {
+      active: { is: true },
+    } as WhereNews);
+    const order = Object.assign(request.order ?? {}, {
+      createdAt: "DESC",
+    } as OrderByNews)
+    try {
+      const paginated = await this._repository.getAllPaginated(pageParams, where, order);
+      return Result.Ok(paginated);
+    } catch (err) {
+      return Result.Fail(new AppError.UnexpectedError(err));
+    }
+  }
+}
