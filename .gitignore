@@ -1,6 +1,7 @@
 # compiled output
 backend/dist
 */node_modules
+*./build
 
 # Logs
 */logs
@@ -18,7 +19,7 @@ backend/dist
 */.nyc_output
 
 # IDEs and editors
-/.idea
+*/.idea/
 .project
 .classpath
 .c9/
@@ -39,4 +40,12 @@ backend/dist
 # Env
 */.env
 
-*/.package-lock.json
+*/package-lock.json
+*/yarn.lock
+
+# misc
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+/.idea/
