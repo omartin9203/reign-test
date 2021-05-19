@@ -10,4 +10,4 @@
 npm run init
 ```
 
-Visit your browser in: `http://localhost:8080/`
+Visit your browser in: `http://localhost:3200/`
