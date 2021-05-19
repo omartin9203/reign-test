@@ -144,7 +144,7 @@ class NewsDetails extends Component<NewsDetailsProps, NewsDetailsState>{
             loading || this.state.deleting
               ? <img src={logo} className="App-logo" alt="logo" />
               : data.items.map(item => (
-                <NewsItem item={item} onDelete={this.onDelete} />
+                <NewsItem key={item.id} item={item} onDelete={this.onDelete} />
               ))
           }
         </div>
