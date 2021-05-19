@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "(Nest + Mongodb + React) with Docker compose",
   "scripts": {
-    "init": "docker-compose up --build"
+    "start": "docker-compose up --build"
   },
   "repository": {
     "type": "git",
