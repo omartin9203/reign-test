@@ -9,7 +9,7 @@ export const graphqlConfig = registerAs('graphql', () => ({
 }));
 
 export const graphqlSchema = {
-  GRAPHQL_SCHEMA: Joi.string().required(),
+  GRAPHQL_SCHEMA: Joi.string().default('schema.gql'),
   GRAPHQL_MAX_FILES: Joi.number().default(0),
   GRAPHQL_MAX_FILES_SIZE: Joi.number().default(0),
   GRAPHQL_DEPTH_LIMIT: Joi.number()

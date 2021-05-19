@@ -52,3 +52,4 @@ frontend/schema.graphql
 /.idea/
 
 frontend/.graphqlconfig
+frontend/build/*

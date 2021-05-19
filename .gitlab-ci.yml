@@ -1,0 +1,17 @@
+build:
+  stage: build
+  script:
+    - echo "Preparaning repository"
+    - cd /var/www/html/backend
+    - git pull https://$USER_GITLAB:$PASS_GITLAB@github.com/omartin9203/reign-test.git
+  only:
+    - develop
+
+test:
+  stage: test
+  script:
+    - echo "Starting tests"
+    - cd /var/www/html/backend
+    - npm run test
+  only:
+    - develop

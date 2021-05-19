@@ -15,6 +15,6 @@ export const appSchema = {
   PORT: Joi.number().default(4000),
   NODE_ENV: Joi.string()
     .valid('development', 'production', 'test', 'provision')
-    .default('test'),
-  LOG_LEVEL: Joi.string().valid('log', 'error', 'warn', 'debug', 'verbose'),
+    .default('development'),
+  LOG_LEVEL: Joi.string().valid('log', 'error', 'warn', 'debug', 'verbose').default('log'),
 };

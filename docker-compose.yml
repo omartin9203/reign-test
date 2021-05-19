@@ -1,0 +1,52 @@
+version: "3.3"
+
+services:
+  reign-test-backend:
+    image: reign-test-backend
+    build:
+      context: ./backend
+      target: production
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    environment:
+      - PORT=4000
+      - LOG_LEVEL=verbose
+      - GRAPHQL_SCHEMA=schema.gql
+      - DATABASE_CONNECT_STRING=mongodb://mongodb:27017/reign_test
+    depends_on:
+      - mongodb
+    networks:
+      - appnetwork
+  reign-test-client:
+    image: reign-test-client
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - 3200:3000
+    depends_on:
+      - reign-test-backend
+    environment:
+      - REACT_APP_API_URL=http://localhost:4000
+    networks:
+      - appnetwork
+
+  mongodb:
+    image: mongo
+    restart: always
+    container_name: mongodb
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - 27017:27017
+    networks:
+      - appnetwork
+#Docker Networks
+networks:
+  # All container connect in a network
+  appnetwork:
+    driver: bridge
+volumes:
+  mongodata: {}
