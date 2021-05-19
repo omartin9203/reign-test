@@ -36,6 +36,7 @@ backend/dist
 
 # GQL - Schema
 *.gql
+frontend/schema.graphql
 
 # Env
 */.env
@@ -49,3 +50,5 @@ backend/dist
 *.env.test.local
 *.env.production.local
 /.idea/
+
+frontend/.graphqlconfig

@@ -1,0 +1,43 @@
+.App-Layout {
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color: white;
+}
+
+.Title {
+    font-family: "Calibri";
+    margin-block: 10px;
+}
+.Description {
+    font-family: "Calibri";
+    margin-block: 10px;
+}
+
+@media only screen and (min-width: 601px) {
+    .App-Layout {
+        min-height: 30vh;
+        padding: 30px;
+    }
+    .Title {
+        font-size: calc(100px + 2vmin);
+    }
+    .Description {
+        font-size: calc(20px + 2vmin);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .App-Layout {
+        min-height: 20vh;
+        padding: 20px;
+    }
+    .Title {
+        font-size: calc(60px + 2vmin);
+    }
+    .Description {
+        font-size: calc(10px + 2vmin);
+    }
+}

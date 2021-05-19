@@ -1,0 +1,29 @@
+.react-search-field {
+    border: 1px #ddd solid;
+    display: inline-flex;
+    justify-content: space-between;
+    /*height: 35px;*/
+}
+.react-search-field-input {
+    outline: none;
+    border: none;
+    font-size: 14px;
+    padding: 10px;
+    flex: 1;
+    color: #5a5a5a;
+    font-weight: 100;
+    /*height: 33px;*/
+}
+
+.react-search-field-button {
+    /*height: 33px;*/
+    /*width: 33px;*/
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+    appearance: none;
+    border: none;
+    border-left: 1px #ddd solid;
+}
