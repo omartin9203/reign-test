@@ -41,14 +41,14 @@ export class NewsItem extends Component<NewsDetailsProps, NewsDetailsState>{
     });
 
     return (
-      <div className="news-item" onClick={() => window.open(item.storyUrl || item.url)}>
-        <div className="news-item-content">
+      <div className="news-item" >
+        <div className="news-item-content-div-1" onClick={() => window.open(item.storyUrl || item.url)}>
           <p className="news-item-content-title">
             {item.title || item.storyTitle}
           </p>
           <span className="news-item-content-author">- {item.author} -</span>
         </div>
-        <div>
+        <div className="news-item-content-div-2">
           <span className="news-item-content-date">{date}</span>
           <img
             className="news-item-content-icon"
