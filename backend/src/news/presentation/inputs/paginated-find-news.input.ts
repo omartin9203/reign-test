@@ -8,8 +8,8 @@ import {OrderByNewsInput} from "./order-by-news.input";
 export class PaginatedFindNewsInput implements PaginatedFindNewsUseCaseDto {
   @Field(() => PageParamsInput)
   pageParams: PageParamsInput;
-  @Field(() => WhereNewsInput, { nullable: true })
-  where?: WhereNewsInput;
+  @Field(() => [WhereNewsInput], { nullable: true })
+  where?: [WhereNewsInput];
   @Field(() => OrderByNewsInput, { nullable: true })
   order?: OrderByNewsInput;
 }

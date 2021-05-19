@@ -28,9 +28,12 @@ export class PaginatedFindNewsUseCase
       return Result.Fail(pageParamsOrErr.unwrapError());
     }
     const pageParams = pageParamsOrErr.unwrap();
-    const where = Object.assign(request.where ?? {}, {
+    request.where = request.where instanceof Array
+      ? request.where.length ? request.where : [{}]
+      : [request.where ?? {}]
+    const where = request.where.map(x => Object.assign(x, {
       active: { is: true },
-    } as WhereNews);
+    } as WhereNews));
     const order = Object.assign(request.order ?? {}, {
       createdAt: "DESC",
     } as OrderByNews)
