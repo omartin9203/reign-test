@@ -41,9 +41,7 @@ export class SyncNewsUseCase extends BaseUseCase<null, Result<void>> {
       const entityOrError = News.new(hnNews.getNewsProps());
       if(entityOrError.isFailure) {
         this._logger.debug(entityOrError.unwrapError().pretty());
-        if(entityOrError.unwrapError() instanceof AppError.ValidationError)
-          continue;
-        return Result.Fail(entityOrError.unwrapError());
+        continue;
       }
       try {
         const unitOfWork: IUnitOfWork = this._unitOfWorkFact.build();

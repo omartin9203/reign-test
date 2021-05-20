@@ -9,5 +9,5 @@ Logger.debug('------------------------' + process.env.DATABASE_CONNECT_STRING + 
 export const databaseSchema = {
   DATABASE_CONNECT_STRING: Joi
     .string()
-    .default('mongodb://mongo:27017/reign_test'),
+    .default('mongodb://mongodb:27017/reign_test'),
 };

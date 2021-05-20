@@ -52,6 +52,6 @@ export class DisableNewsUseCase
     const result = entity.toDisable();
     if(result.isFailure) return Result.Fail(result.unwrapError());
     await repository.save(entity);
-    return Result.Ok(result.unwrap());
+    return Result.Ok();
   }
 }
