@@ -7,7 +7,7 @@
 
 ## Run
 ```
-npm run init
+npm run start
 ```
 
 Visit your browser in: `http://localhost:3200/`
